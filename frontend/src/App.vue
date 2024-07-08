@@ -1,148 +1,155 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Greet from "./components/Greet.vue";
+// import Greet from "./components/Greet.vue";
 </script>
 
 <template>
-  <div class="container">
-    <h1>Welcome to Tauri!</h1>
-
-    <div class="row">
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo vite" alt="Vite logo" />
-      </a>
-      <a href="https://tauri.app" target="_blank">
-        <img src="/tauri.svg" class="logo tauri" alt="Tauri logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
+  <!-- <div class="container">
+    <div class="games">
+      <button> Game </button>
     </div>
+    <div class="news">
+      <h2>News</h2>
+    </div>
+  </div> -->
+  <div class="main-screen">
+    <div class="content">
+      <div class="left-section">
+        <h2 class="games-title">Games</h2>
+        <div class="game-container">
+          <div v-for="n in 3" :key="n" class="single-title">
+            <button class="game-button"> Button {{ n }}</button>
+            <p class="game-name">game name {{ n }}</p>
+          </div>
+         
+        </div>
+      </div>
+      
+      <div class="right-section">
+        <div class="news-spacer"></div>
+        <div class="news-container">
+            <h2>News</h2>
+            <div class="news-list">
+              <li> first and foremost, hello This is a list explaing stuff</li>
+              <li> news item 2</li>
+              <li> news item 3</li>
+              <li> news item 3</li>
+              <li> news item 3</li>
+              <li> news item 3</li>
+              <li> news item 3</li>
+              <li> news item 3</li>
+            </div>
+        </div>
+      </div>
 
-    <p>Click on the Tauri, Vite, and Vue logos to learn more.</p>
-
-    <Greet />
+    </div>
+    <div class="footer">
+      <span class="version">Version 1.0.0</span>
+      <div class="footer-buttons">
+        <button @click="goToAdmin">Admin</button>
+        <button @click="updateApp">Update</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #249b73);
-}
-
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color: #0f0f0f;
-  background-color: #f6f6f6;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-.container {
-  margin: 0;
-  padding-top: 10vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
-}
-
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-h1 {
-  text-align: center;
-}
-
-input,
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-button {
-  cursor: pointer;
-}
-
-button:hover {
-  border-color: #396cd8;
-}
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
-}
-
-input,
-button {
-  outline: none;
-}
-
-#greet-input {
-  margin-right: 5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
+  .main-screen {
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+    min-height: 95vh;
+    max-height: 95vh;
+    /* overflow-y: auto; */
   }
 
-  a:hover {
-    color: #24c8db;
+  .content {
+    display: flex;
+    width: 100%;
+    /* height: 90vh; */
+    height: inherit;
+    min-height: inherit;
+    /* max-height: 90vh; */
   }
 
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
+  .left-section{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    /* align-items: center; */
   }
-  button:active {
-    background-color: #0f0f0f69;
+
+  .games-title {
+    align-self: center;
   }
-}
+
+  .game-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-auto-rows: calc(33.33% - 40px); */
+    grid-auto-rows: 200px;
+    overflow-y: auto;
+    gap: 5px;
+  }
+
+  .single-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-button {
+    height: 150px;
+    width: 150px;
+    min-block-size: 150px;
+    margin: 10px;
+    margin-bottom: 5px;
+  }
+  .game-name {
+    padding: 0px;
+    margin: 0;
+  }
+
+  .right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .news-spacer {
+    flex: .2
+  }
+
+  .news-container {
+    flex: 1;
+    border: 1px solid black;
+    /* min-width: 300px; */
+    width: 70%;
+    max-width: 350px;
+    height: 70%;
+    max-height: 440px;
+    text-align: center;
+  }
+
+  .news-list {
+    text-align: left;
+    padding: 15px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-inline: 20px;
+    /* margin-bottom: 50px; */
+  }
+
+  .footer-buttons {
+    display: flex;
+    gap: 10px;
+  }
 
 </style>
